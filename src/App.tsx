@@ -1,12 +1,39 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  
+  const [active, setActive] = useState('')
+  const [w123, setW123] = useState(1)
+
+  useEffect(() => {
+    setInterval(() => {
+      setW123(e => e+1)
+    }, 1000)
+  }, [])
+
+  useEffect(() => console.log(active), [active, w123])
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <img
+          src={logo}
+          className={"App-logo " + active}
+          alt="logo"
+          id='Test'
+          onClick={() => {
+            setTimeout(() => {
+              setActive((current) => {
+                if (!current)
+                  return 'active'
+                else
+                  return ''
+              })
+            }, 1000)
+          }}
+          />
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
